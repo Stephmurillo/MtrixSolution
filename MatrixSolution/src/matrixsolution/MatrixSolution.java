@@ -31,6 +31,7 @@ public class MatrixSolution {
     private static List<BoxItem> ListB = null;
 
     public static void main(String[] args) {
+        //Reading XML files 
         System.out.println("_____MATRIZ A_____");
         ListA = readAttributesXml(XML_FILE_A);
         System.out.println();
@@ -38,16 +39,23 @@ public class MatrixSolution {
         ListB = readAttributesXml(XML_FILE_B);
         System.out.println();
 
-        int canRows = 200, canColumns = 200;
+        //Test values for a matrix
+        int canRows = 10, canColumns = 5;
+        
+        //Create and fill a sparse matrix with XML readed objects
         SparseMatrix<BoxItem> matrix = new SparseMatrix(canRows, canColumns);
-
-        for(int i = 0; i < canRows; i++){
+        for(int i = 0; i < matrix.getNumRows(); i++){
             matrix.addRow(getListRow(ListA, i));
         }
-        for(int i = 0; i < canRows; i++){
+        for(int i = 0; i < matrix.getNumColumns(); i++){
             matrix.addColumn(getListColumn(ListA, i));
         }
         System.out.println(matrix.toString());
+        
+        //Create and fill a sparse matrix with specific objects
+        Integer zero = 0;
+        SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns,zero);
+        System.out.println(matrixT.toString());
     }
 
     
