@@ -24,7 +24,33 @@ public class SparseMatrix<T> {
     public SparseMatrix(int numRows, int numColumns) {
         this.numRows = numRows;
         this.numColumns = numColumns;
-        
+    }
+    
+    public SparseMatrix(int numRows, int numColumns, T objItem) {
+        this.numRows = numRows;
+        this.numColumns = numColumns;
+        List<T> tempRowList = new List<>();
+        List<T> tempColunmList = new List<>();
+        for(int i = 0; i < this.numColumns; i++){
+            tempRowList.add(objItem);
+        }
+        for(int i = 0; i < this.numRows; i++){
+            tempColunmList.add(objItem);
+        }
+        for(int i = 0; i < this.numRows; i++){
+            addRow(tempRowList);
+        }
+        for(int i = 0; i < this.numColumns; i++){
+            addColumn(tempColunmList);
+        }
+    }
+
+    public int getNumRows() {
+        return numRows;
+    }
+
+    public int getNumColumns() {
+        return numColumns;
     }
     
     public void addRow(List<T> row){
@@ -42,7 +68,7 @@ public class SparseMatrix<T> {
     
     @Override
     public String toString() {
-        return "SparseMatrix{" + "\nrows=" + rows + ", \ncolumns=" + columns + ", numRows=" + numRows + ", numColumns=" + numColumns + '}';
+        return "SparseMatrix{\n" + rows + "\nnumRows=" + numRows + ", numColumns=" + numColumns + '}';
     }
     
     public List<List<T>> rows = new List();
