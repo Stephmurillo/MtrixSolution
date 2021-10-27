@@ -12,15 +12,27 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- *
- * @author muril
- */
+*
+* (c) 2021
+* @author Yoselin Rojas, Cinthya Murillo, Sebastián Cabezas
+* @version 1.0.0 2021-10-24
+*
+* -----------------------------------------------
+* EIF207 Estructuras de Datos
+* 2do ciclo 2021
+* Proyecto 1
+*
+* 207700499 Rojas Fuentes, Yoselin - Grupo 04
+* 305260682 Murillo Hidalgo, Cinthya - Grupo 05
+* 402260762 Cabezas Madrigal, Sebastián  - Grupo 4
+* -----------------------------------------------
+ * @param <T>
+*
+*
+*/
+
 public class MatrixSolution {
 
-    /**
-     * @param args the command line arguments
-     * @throws java.lang.Exception
-     */
     private final static String XML_FILE_A = "A.xml";
     private final static String XML_FILE_B = "B.xml";
     private final static String ROW_ATTRIBUTE = "row";
