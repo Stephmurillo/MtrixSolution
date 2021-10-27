@@ -19,6 +19,7 @@ package collection;
 *
 *
 */
+
 public class Node<T> {
 
     public Node(T info, Node<T> right, Node<T> down) {
