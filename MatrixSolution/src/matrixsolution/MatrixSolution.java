@@ -1,6 +1,6 @@
 package matrixsolution;
 
-import collection.Casilla;
+import collection.BoxItem;
 import collection.List;
 import collection.Node;
 import collection.SparseMatrix;
@@ -39,31 +39,40 @@ public class MatrixSolution {
     private final static String COLUMN_ATTRIBUTE = "column";
     private final static String VALUE_ATTRIBUTE = "value";
     
-    private static List<Casilla> ListA = null;
-    private static List<Casilla> ListB = null;
+    private static List<BoxItem> ListA = null;
+    private static List<BoxItem> ListB = null;
 
     public static void main(String[] args) {
+        //Reading XML files 
         System.out.println("_____MATRIZ A_____");
         ListA = readAttributesXml(XML_FILE_A);
         System.out.println();
         System.out.println("_____MATRIZ B_____");
         ListB = readAttributesXml(XML_FILE_B);
+        System.out.println();
 
-        int canFilas = 10;
-        SparseMatrix<Casilla> matrix = new SparseMatrix(canFilas);
-       // Node tempNode = fillInfo(0, 0, 3, 3);
-       // display(tempNode);
+        //Test values for a matrix
+        int canRows = 10, canColumns = 5;
         
-        for(int i = 0; i < canFilas; i++){
-            matrix.addFila(getListRow(ListA,i));
+        //Create and fill a sparse matrix with XML readed objects
+        SparseMatrix<BoxItem> matrix = new SparseMatrix(canRows, canColumns);
+        for(int i = 0; i < matrix.getNumRows(); i++){
+            matrix.addRow(getListRow(ListA, i));
         }
-        // l1.add(tempNode.getInfo());
-
-         System.out.println(matrix.toString());
+        for(int i = 0; i < matrix.getNumColumns(); i++){
+            matrix.addColumn(getListColumn(ListA, i));
+        }
+        System.out.println(matrix.toString());
+        
+        //Create and fill a sparse matrix with specific objects
+        Integer zero = 0;
+        SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns,zero);
+        System.out.println(matrixT.toString());
     }
 
-    private static List<Casilla> readAttributesXml(String path) {
-        List<Casilla> tempList = new List();
+    
+    private static List<BoxItem> readAttributesXml(String path) {
+        List<BoxItem> tempList = new List();
         File file = readXmlFile(path);
         Document document = null;
 
@@ -88,13 +97,13 @@ public class MatrixSolution {
                 Element eValue = (Element) entryNodeList.item(i);
                 int value = Integer.parseInt(eValue.getElementsByTagName(VALUE_ATTRIBUTE).item(0).getTextContent());
 
-                System.out.println("-- row -- column -- value");
-                System.out.println(String.format("-- %s -- %s -- %s", row, column, value));
-                Casilla objCasilla = new Casilla(row, column, value);
+              //  System.out.println("-- row -- column -- value");
+               // System.out.println(String.format("-- %s -- %s -- %s", row, column, value));
+                BoxItem objCasilla = new BoxItem(row, column, value);
                 tempList.add(objCasilla);
             }
         }
-        
+        System.out.println("--all was read--");
         return tempList;
     }
 
@@ -110,68 +119,31 @@ public class MatrixSolution {
 
         return file;
     }
-
-    private static Node<Integer> fillInfo(int i, int j, int m, int n) {
-        if (i > n - 1 || j > m - 1) {
-            return null;
-        }
-        // create a new node for current i and j
-        // and recursively allocate its down and
-        // right pointers
-        Node temp = new Node();
-        temp.setInfo(getListInfo(ListA, i, j));
-        temp.setRight(fillInfo(i, j + 1, m, n));
-        temp.setDown(fillInfo(i + 1, j, m, n));
-        return temp;
-    }
-
-    private static void display(Node head) {
-        // pointer to move right
-        Node Rp;
-
-        // pointer to move down
-        Node Dp = head;
-
-        // loop till node->down is not NULL
-        while (Dp != null) {
-            Rp = Dp;
-
-            // loop till node->right is not NULL
-            while (Rp != null) {
-                System.out.print(Rp.getInfo() + " ");
-                Rp = Rp.getRight();
-            }
-            System.out.println();
-            Dp = Dp.getDown();
-        }
-    }
     
-    private static int getListInfo(List<Casilla> list, int row, int column) {
-        List<Casilla> matchesRows = new List();
-        
+    private static List<BoxItem> getListRow(List<BoxItem> list, int row) {
+        List<BoxItem> matchesRows = new List();
+        Node<BoxItem> auxNode = list.getFirst();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getFila() == row) {
-                matchesRows.add(list.get(i));
+            if (list.get(i).getRow() == row) {
+                matchesRows.add(auxNode.getInfo());
             }
-        }
-        
-        for (int i = 0; i < matchesRows.size(); i++) {
-            if (matchesRows.get(i).getColumna() == column) {
-                return matchesRows.get(i).valor;
-            }
-        }
-        return 0;
-    }
-    
-    private static List<Casilla> getListRow(List<Casilla> list, int row) {
-        List<Casilla> matchesRows = new List();
-        
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getFila() == row) {
-                matchesRows.add(list.get(i));
-            }
+            auxNode = auxNode.getRight();
         }
         
        return matchesRows;
+    }
+
+
+    private static List<BoxItem> getListColumn(List<BoxItem> list, int column) {
+            List<BoxItem> matchesRows = new List();
+            Node<BoxItem> auxNode = list.getFirst();
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getColumn() == column) {
+                    matchesRows.add(auxNode.getInfo());
+                }
+                auxNode = auxNode.getRight();
+            }
+
+           return matchesRows;
     }
 }

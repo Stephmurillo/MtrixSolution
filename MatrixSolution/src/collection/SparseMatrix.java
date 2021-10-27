@@ -21,23 +21,58 @@ package collection;
 **/
 public class SparseMatrix<T> {
 
-    public SparseMatrix(int numFilas/*, int numColumnas*/) {
-        this.numFilas = numFilas;
-        //this.numColumnas = numColumnas;
-        
+    public SparseMatrix(int numRows, int numColumns) {
+        this.numRows = numRows;
+        this.numColumns = numColumns;
     }
     
-    public void addFila(List<T> fila){
-        this.filas.add(fila);
+    public SparseMatrix(int numRows, int numColumns, T objItem) {
+        this.numRows = numRows;
+        this.numColumns = numColumns;
+        List<T> tempRowList = new List<>();
+        List<T> tempColunmList = new List<>();
+        for(int i = 0; i < this.numColumns; i++){
+            tempRowList.add(objItem);
+        }
+        for(int i = 0; i < this.numRows; i++){
+            tempColunmList.add(objItem);
+        }
+        for(int i = 0; i < this.numRows; i++){
+            addRow(tempRowList);
+        }
+        for(int i = 0; i < this.numColumns; i++){
+            addColumn(tempColunmList);
+        }
     }
 
+    public int getNumRows() {
+        return numRows;
+    }
+
+    public int getNumColumns() {
+        return numColumns;
+    }
+    
+    public void addRow(List<T> row){
+        this.rows.add(row);
+    }
+    
+    public void addColumn(List<T> row){
+        this.columns.add(row);
+    }
+    
+    public void addBoxItem(int numRow, int numColumn, Node<T> objItem){
+        this.columns.get(numColumn).add(objItem, numColumn);
+        this.rows.get(numRow).add(objItem, numRow);
+    }
+    
     @Override
     public String toString() {
-        return "SparseMatrix{" + "filas=" + filas + ", numFilas=" + numFilas + '}';
+        return "SparseMatrix{\n" + rows + "\nnumRows=" + numRows + ", numColumns=" + numColumns + '}';
     }
-   
-    public List<List<T>> filas = new List();
-   // public List<List<Integer>> columnas;
-    public int numFilas;
-    //public int numColumnas;
+    
+    public List<List<T>> rows = new List();
+    public List<List<T>> columns = new List();
+    public int numRows;
+    public int numColumns;
 }

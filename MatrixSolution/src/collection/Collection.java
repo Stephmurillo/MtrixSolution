@@ -88,7 +88,7 @@ public abstract class Collection<T> implements Iterable<T> {
 
     @Override
     public String toString() {
-        return toString(true);
+        return toString(false);
     }
 
     public String toString(boolean f) {
@@ -100,17 +100,14 @@ public abstract class Collection<T> implements Iterable<T> {
         Iterator<T> i = iterator();
         while (i.hasNext()) {
             if (f) {
-                r.append("\n\t");
+                r.append("\t");
             }
             r.append(i.next());
             if (i.hasNext()) {
                 r.append(", ");
             }
         }
-        if (f) {
-            r.append("\n");
-        }
-        r.append("]");
+        r.append("\n");
         return r.toString();
     }
 

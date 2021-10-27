@@ -107,7 +107,50 @@ public class List<T> extends Collection<T> {
         }
         return r;
     }
+    
 
+    public void add(Node<T> obj) {
+        if (obj != null) {
+            if (first == null) {
+                first = last = obj;
+            } else {
+                last.setRight(obj);
+                last = obj;
+            }
+            n++;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void add(Node<T> obj, int pos) {
+        if (obj != null) {
+            if ((pos < 0) || (n <= pos)) {
+                add(obj);
+            } else {
+                if (pos == 0) {
+                    if (first.getRight() == null) {
+                        last = first;
+                    }
+                } else {
+                    Node<T> cursor = first;
+                    int k = 1;
+                    while (k < pos) {
+                        cursor = cursor.getRight();
+                        k++;
+                    }
+                    cursor.setRight(obj);
+                    if (cursor.getRight() == null) {
+                        last = cursor;
+                    }
+                }
+                n++;
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+    
     @Override
     public T remove(int pos) {
         T r = null;
@@ -187,18 +230,19 @@ public class List<T> extends Collection<T> {
         }
         return r;
     }
-
+    
     @Override
     public Iterator<T> iterator() {
         return new ListIterator<>(first);
     }
 
-    private int n;
-    private Node<T> first;
 
     public Node<T> getFirst() {
         return first;
     }
+    
+    private int n;
+    private Node<T> first;
     private Node<T> last;
 
 }
