@@ -66,8 +66,12 @@ public class MatrixSolution {
         
         //Create and fill a sparse matrix with specific objects
         Integer zero = 0;
-        SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns,zero);
+        SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns, zero);
         System.out.println(matrixT.toString());
+        
+        
+       // System.out.println(matrixT.transpose().toString());
+//        System.out.println("Valor: " + matrixT.getFila(3));
     }
 
     

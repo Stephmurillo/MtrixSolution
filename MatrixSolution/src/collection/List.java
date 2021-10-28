@@ -214,19 +214,32 @@ public class List<T> extends Collection<T> {
         }
         return r;
     }
+    
+//    public T getObject(int pos) {
+//        Node<T> aux = this.first;
+//        int k = 0;
+//        while (aux != null) {
+//            //int obj = Integer.parseInt((String) aux.getRight().getInfo());
+//            if (k == pos) {
+//                return aux.getInfo();
+//            }
+//            aux = aux.getRight();
+//            k++;
+//        }
+//        return null;
+//    }
 
     @Override
     public T get(int pos) {
         T r = null;
-        if ((0 <= pos) && (pos < size())) {
-
+        if ((0 <= pos) && (pos < this.size())) {
             Iterator<T> i = iterator();
             int k = 0;
             while (k < pos) {
                 i.next();
                 k++;
             }
-            r = i.next(); 
+            r = i.next();
         }
         return r;
     }
