@@ -54,32 +54,14 @@ public class SparseMatrix<T> {
         return numColumns;
     }
     
-    public T getObjItem() {
-        return objItem.getInfo();
+    void setNumRows(int r) {
+        numRows = r;
     }
-    
-//    public T get(int f) {
-//        T r = null;
-//        List<T> auxRow = this.rows.get(f);
-//        if ((0 <= f) && (f < this.rows.size())) {
-//            while (auxRow != null) {
-//                if (auxRow.getFirst().getInfo().toString() == f) {
-//                } else {
-//
-//                }
-//            }
-//        }
-//        return null;
-//    }
-    
-//    public T getBoxItem(int numRow, int numColumn) {
-//        List<T> aux = rows.get(numRow);
-//        if(aux.getObject(numColumn) != null){
-//            return aux.getObject(numColumn);
-//        }
-//        return null;
-//    }
-    
+
+    void setNumColumns(int c) {
+        numColumns = c;
+    }
+
     public void addRow(List<T> row){
         this.rows.add(row);
     }
@@ -95,26 +77,20 @@ public class SparseMatrix<T> {
     
     @Override
     public String toString() {
-        return (String) objItem.getInfo();
-    }
-    
-    public List<T> getFila(int i) {
-        List<T> list = new List<T>();
-            list = rows.get(i);
-        return list;
+        return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
+        /*(String) objItem.getInfo();*/
     }
         
-    public SparseMatrix<T> transpose() {
-        SparseMatrix<T> newMatrix = new SparseMatrix<T>(this.getNumColumns(), this.getNumRows());
+    public List<T> transpose() {
+        List<T> newMatrix = new List<T>();
+        this.setNumRows(this.getNumColumns());
+        this.setNumColumns(this.getNumRows());
         try {
             for (int i = 0; i <= this.getNumRows(); i++) {
-                List<T> fila = this.getFila(i);
-                newMatrix.addColumn(fila);
+                List<T> fila = this.columns.get(i);
+                newMatrix.add((T) fila);
             }
-
-        } catch (Exception Ex) {
-
-        }
+        } catch (Exception Ex){}
         return newMatrix;
     }
     

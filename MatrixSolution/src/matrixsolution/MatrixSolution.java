@@ -69,9 +69,8 @@ public class MatrixSolution {
         SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns, zero);
         System.out.println(matrixT.toString());
         
-        
-       // System.out.println(matrixT.transpose().toString());
-//        System.out.println("Valor: " + matrixT.getFila(3));
+        //Create a transpose matrixT
+        System.out.println("TransposeMatrix{ \n" + matrixT.transpose().toString());
     }
 
     
