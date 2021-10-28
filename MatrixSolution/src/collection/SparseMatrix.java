@@ -19,6 +19,7 @@ package collection;
 }
  * @param <T>
 **/
+
 public class SparseMatrix<T> {
 
     public SparseMatrix(int numRows, int numColumns) {
@@ -53,6 +54,14 @@ public class SparseMatrix<T> {
         return numColumns;
     }
     
+    void setNumRows(int r) {
+        numRows = r;
+    }
+
+    void setNumColumns(int c) {
+        numColumns = c;
+    }
+
     public void addRow(List<T> row){
         this.rows.add(row);
     }
@@ -68,11 +77,27 @@ public class SparseMatrix<T> {
     
     @Override
     public String toString() {
-        return "SparseMatrix{\n" + rows + "\nnumRows=" + numRows + ", numColumns=" + numColumns + '}';
+        return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
+        /*(String) objItem.getInfo();*/
+    }
+        
+    public List<T> transpose() {
+        List<T> newMatrix = new List<T>();
+        this.setNumRows(this.getNumColumns());
+        this.setNumColumns(this.getNumRows());
+        try {
+            for (int i = 0; i <= this.getNumRows(); i++) {
+                List<T> fila = this.columns.get(i);
+                newMatrix.add((T) fila);
+            }
+        } catch (Exception Ex){}
+        return newMatrix;
     }
     
     public List<List<T>> rows = new List();
     public List<List<T>> columns = new List();
+    public Node<T> objItem = new Node();
     public int numRows;
     public int numColumns;
+    
 }

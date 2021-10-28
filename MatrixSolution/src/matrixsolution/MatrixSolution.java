@@ -66,8 +66,11 @@ public class MatrixSolution {
         
         //Create and fill a sparse matrix with specific objects
         Integer zero = 0;
-        SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns,zero);
+        SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns, zero);
         System.out.println(matrixT.toString());
+        
+        //Create a transpose matrixT
+        System.out.println("TransposeMatrix{ \n" + matrixT.transpose().toString());
     }
 
     
