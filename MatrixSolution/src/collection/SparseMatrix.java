@@ -39,10 +39,10 @@ public class SparseMatrix<T> {
             tempColunmList.add(objItem);
         }
         for(int i = 0; i < this.numRows; i++){
-            addRow(tempRowList);
+            this.addRow(tempRowList);
         }
         for(int i = 0; i < this.numColumns; i++){
-            addColumn(tempColunmList);
+            this.addColumn(tempColunmList);
         }
     }
 
@@ -75,12 +75,24 @@ public class SparseMatrix<T> {
         this.rows.get(numRow).add(objItem, numRow);
     }
     
+    public T getBoxItem(int r, int c) {
+        T obj = null;
+        List<T> fila = this.columns.get(r);
+        obj = fila.get(c);
+        return obj;
+    }
+    
     @Override
     public String toString() {
         return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
         /*(String) objItem.getInfo();*/
     }
-        
+    
+    public List<T> getColumna(int i) {
+        List<T> fila = this.columns.get(i);
+        return fila;
+    }
+    
     public List<T> transpose() {
         List<T> newMatrix = new List<T>();
         this.setNumRows(this.getNumColumns());

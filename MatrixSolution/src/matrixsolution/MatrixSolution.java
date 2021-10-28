@@ -64,12 +64,16 @@ public class MatrixSolution {
         }
         System.out.println(matrix.toString());
         
+        //Get the value of a position
+        System.out.println("\nValor / Pos[1, 0]: " + matrix.getBoxItem(1, 0) + "\n");
+        System.out.println("\nValor2 / Pos[1, 1]: " + matrix.getBoxItem(1, 1) + "\n");
+        
         //Create and fill a sparse matrix with specific objects
         Integer zero = 0;
         SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns, zero);
         System.out.println(matrixT.toString());
         
-        //Create a transpose matrixT
+        //Create transpose matrixT
         System.out.println("TransposeMatrix{ \n" + matrixT.transpose().toString());
     }
 
