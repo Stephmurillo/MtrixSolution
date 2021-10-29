@@ -107,7 +107,7 @@ public abstract class Collection<T> implements Iterable<T> {
                 r.append(", ");
             }
         }
-        r.append("\n");
+        r.append("]\n");
         return r.toString();
     }
 
