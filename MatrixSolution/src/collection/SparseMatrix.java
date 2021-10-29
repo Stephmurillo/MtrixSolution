@@ -45,7 +45,28 @@ public class SparseMatrix<T> {
             this.addColumn(tempColunmList);
         }
     }
-
+    
+//    public SparseMatrix(int numRows, int numColumns) {
+//        Integer aux = 0;
+//        T zero = (T) aux;
+//        this.numRows = numRows;
+//        this.numColumns = numColumns;
+//        List<T> tempRowList = new List<>();
+//        List<T> tempColunmList = new List<>();
+//        for(int i = 0; i < this.numColumns; i++){
+//            tempRowList.add(zero);
+//        }
+//        for(int i = 0; i < this.numRows; i++){
+//            tempColunmList.add(zero);
+//        }
+//        for(int i = 0; i < this.numRows; i++){
+//            this.addRow(tempRowList);
+//        }
+//        for(int i = 0; i < this.numColumns; i++){
+//            this.addColumn(tempColunmList);
+//        }
+//    }
+    
     public int getNumRows() {
         return numRows;
     }
@@ -77,7 +98,7 @@ public class SparseMatrix<T> {
     
     public T getBoxItem(int r, int c) {
         T obj = null;
-        List<T> fila = this.columns.get(r);
+        List<T> fila = this.rows.get(r);
         obj = fila.get(c);
         return obj;
     }
@@ -106,6 +127,23 @@ public class SparseMatrix<T> {
         return newMatrix;
     }
     
+    public List<T> splice(int f1, int f2, int c1, int c2) {
+        List<T> newMatrix = new List<T>();
+        List<T> aux = new List<T>();
+        T obj = null;
+        try {
+            for (int i = f1; i <= f2; i++) {
+                List<T> fila = this.rows.get(i);
+                for (int j = c1; j <= c2; j++) {
+                    obj = fila.get(j);
+                }
+                aux.add(obj);
+                newMatrix.add((T) aux);
+            }
+        } catch (Exception ex){}
+        return newMatrix;
+    }
+        
     public List<List<T>> rows = new List();
     public List<List<T>> columns = new List();
     public Node<T> objItem = new Node();

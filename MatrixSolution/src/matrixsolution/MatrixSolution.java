@@ -50,7 +50,9 @@ public class MatrixSolution {
         System.out.println("_____MATRIZ B_____");
         ListB = readAttributesXml(XML_FILE_B);
         System.out.println();
-
+        
+        //********************************************************************************
+        
         //Test values for a matrix
         int canRows = 10, canColumns = 5;
         
@@ -64,17 +66,31 @@ public class MatrixSolution {
         }
         System.out.println(matrix.toString());
         
-        //Get the value of a position
-        System.out.println("\nValor / Pos[1, 0]: " + matrix.getBoxItem(1, 0) + "\n");
-        System.out.println("\nValor2 / Pos[1, 1]: " + matrix.getBoxItem(1, 1) + "\n");
+        //Get the value of a specific position
+        System.out.println("\nValor / Pos[0, 0]: " + matrix.getBoxItem(0, 0) + "\n");
+        
+        //Create transpose matrix
+        System.out.println("Obteniendo la columna '0': " + matrix.getColumna(0));
+        System.out.println("TransposeMatrix{ \n" + matrix.transpose().toString());
+        
+        //Create splice matrix
+        System.out.println("SpliceMatrix{ \n" + matrix.splice(1, 3, 2, 4).toString());
+        
+        //********************************************************************************
         
         //Create and fill a sparse matrix with specific objects
         Integer zero = 0;
         SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns, zero);
         System.out.println(matrixT.toString());
         
-        //Create transpose matrixT
+        System.out.println("\nObteniendo la columna '0': " + matrixT.getColumna(0));
+       //Create transpose matrixT
         System.out.println("TransposeMatrix{ \n" + matrixT.transpose().toString());
+        
+        //Create splice matrixT
+        System.out.println("SpliceMatrix{ \n" + matrixT.splice(1, 3, 2, 4).toString());
+        
+        //******************************************************************************** 
     }
 
     
@@ -82,6 +98,7 @@ public class MatrixSolution {
         List<BoxItem> tempList = new List();
         File file = readXmlFile(path);
         Document document = null;
+        int value = 0;
 
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -102,10 +119,8 @@ public class MatrixSolution {
                 int column = Integer.parseInt(eColumn.getElementsByTagName(COLUMN_ATTRIBUTE).item(0).getTextContent());
 
                 Element eValue = (Element) entryNodeList.item(i);
-                int value = Integer.parseInt(eValue.getElementsByTagName(VALUE_ATTRIBUTE).item(0).getTextContent());
-
-              //  System.out.println("-- row -- column -- value");
-               // System.out.println(String.format("-- %s -- %s -- %s", row, column, value));
+                value = Integer.parseInt(eValue.getElementsByTagName(VALUE_ATTRIBUTE).item(0).getTextContent());
+                
                 BoxItem objCasilla = new BoxItem(row, column, value);
                 tempList.add(objCasilla);
             }

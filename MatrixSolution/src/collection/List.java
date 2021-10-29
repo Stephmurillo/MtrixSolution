@@ -73,7 +73,7 @@ public class List<T> extends Collection<T> {
                         cursor = cursor.getRight();
                         k++;
                     }
-                    cursor.setRight(new Node<>(obj, cursor.getRight(), cursor.getDown()));
+                    cursor.getRight().setInfo(obj);
                     if (cursor.getRight() == null) {
                         last = cursor;
                     }
@@ -214,20 +214,6 @@ public class List<T> extends Collection<T> {
         }
         return r;
     }
-    
-//    public T getObject(int pos) {
-//        Node<T> aux = this.first;
-//        int k = 0;
-//        while (aux != null) {
-//            //int obj = Integer.parseInt((String) aux.getRight().getInfo());
-//            if (k == pos) {
-//                return aux.getInfo();
-//            }
-//            aux = aux.getRight();
-//            k++;
-//        }
-//        return null;
-//    }
 
     @Override
     public T get(int pos) {
@@ -248,7 +234,6 @@ public class List<T> extends Collection<T> {
     public Iterator<T> iterator() {
         return new ListIterator<>(first);
     }
-
 
     public Node<T> getFirst() {
         return first;
