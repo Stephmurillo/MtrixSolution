@@ -73,7 +73,7 @@ public class List<T> extends Collection<T> {
                         cursor = cursor.getRight();
                         k++;
                     }
-                    cursor.setRight(new Node<>(obj, cursor.getRight(), cursor.getDown()));
+                    cursor.setRight(new Node<>(obj, cursor.getRight(), null));
                     if (cursor.getRight() == null) {
                         last = cursor;
                     }
