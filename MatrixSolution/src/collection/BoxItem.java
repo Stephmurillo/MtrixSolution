@@ -54,8 +54,10 @@ public class BoxItem {
 
     @Override
     public String toString() {
-        return "{"+ valor + '}';
+        return String.valueOf(valor);
     }
+
+    
     
     
     public int row;
