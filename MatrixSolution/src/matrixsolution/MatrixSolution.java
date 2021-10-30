@@ -91,16 +91,18 @@ public class MatrixSolution {
         matrixA.setT(0, 1, val);
         matrixA.setT(1, 0, val);
         matrixA.setT(1, 1, val);
-        System.out.println("MatrixA: \n" + matrixA.toString());
+        System.out.println("\nMatrixA: \n" + matrixA.toString());
         
         SparseMatrix<BoxItem> matrixB = new SparseMatrix<BoxItem>(2, 2);
         matrixB.setT(0, 0, val);
         matrixB.setT(0, 1, val);
         matrixB.setT(1, 0, val);
         matrixB.setT(1, 1, val);
-        System.out.println("MatrixB: \n" + matrixB.toString());
+        System.out.println("\nMatrixB: \n" + matrixB.toString());
         
-        System.out.println("MatrixA + MatrixB: \n" + matrixA.add(matrixB).toString());
+        //Sum matrices
+        matrixA.add(matrixB);
+        System.out.println("\nMatrixA + MatrixB: \n" + matrixA.add(matrixB).toString());
     }
 
     
