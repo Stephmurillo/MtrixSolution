@@ -180,8 +180,8 @@ public SparseMatrix<T> transpose(){
         boolean flag = false;
         for (int i = 0; i < this.getNumColumns(); i++) {
             for (int j = 0; j < this.getNumRows(); j++) {
-               if(this.getNumRows() == other.getNumRows() && this.getNumColumns() == other.getNumColumns()){
-                    if(this.getRows().get(i).get(j).equals(other.getRows().get(i).get(j))){
+               if(this.getNumRows() == other.getNumRows() && this.getNumColumns() == other.getNumColumns()){ //si ambos objetos son iguales retorna true
+                    if(this.getT(i, j).toString().compareTo(other.getT(i, j).toString()) == 0){                    
                         flag = true;
                     }
                     else{

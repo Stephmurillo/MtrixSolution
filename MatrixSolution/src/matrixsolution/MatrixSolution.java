@@ -1,8 +1,6 @@
 package matrixsolution;
 
 import collection.BoxItem;
-import collection.List;
-import collection.Node;
 import collection.SparseMatrix;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -14,7 +12,7 @@ import org.w3c.dom.NodeList;
 /**
 *
 * (c) 2021
-* @author Yoselin Rojas, Cinthya Murillo, Sebastián Cabezas
+* @author Yoselin Rojas, Cinthya Murillo
 * @version 1.0.0 2021-10-24
 *
 * -----------------------------------------------
@@ -24,7 +22,6 @@ import org.w3c.dom.NodeList;
 *
 * 207700499 Rojas Fuentes, Yoselin - Grupo 04
 * 305260682 Murillo Hidalgo, Cinthya - Grupo 05
-* 402260762 Cabezas Madrigal, Sebastián  - Grupo 4
 * -----------------------------------------------
  * @param <T>
 *
@@ -62,7 +59,7 @@ public class MatrixSolution {
         System.out.println("Equals?{ \n" + SparseMatrixA.Equals(SparseMatrixB));
         
         SparseMatrix<BoxItem> matrix = new SparseMatrix<BoxItem>(10, 5);
-        System.out.println(matrix.toString());
+        System.out.println("\n\n" + matrix.toString());
         
         BoxItem val = new BoxItem(0, 0 ,1);
         matrix.setT(0, 0, val);
@@ -84,6 +81,10 @@ public class MatrixSolution {
         //Create splice matrix
         System.out.println("SpliceMatrix [f1=[1] | f2=[6] | c1=[2] | c2=[3]{ \nNOTA: Las filas empiezan en 0 y las columnas en 1.\n" + 
                 matrix.splice(1, 6, 2, 3).toString());
+        
+        //They are equals?
+        System.out.println("Equals? [Matrix1 & SparseMatrixA]{ \n" + matrix.Equals(SparseMatrixA));
+        System.out.println("Equals? [Matrix & Matrix]{ \n" + matrix.Equals(matrix));
     }
 
     
