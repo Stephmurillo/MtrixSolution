@@ -78,7 +78,7 @@ public class SparseMatrix<T> {
         T obj = null;
         List<T> fila = this.rows.get(r); //Retorna la fila específicada
         obj = fila.get(c); //Retorna el objeto en la posición especificada de la fila
-        if(obj == null){
+        if(obj == null){ //Si el valor es nulo lo cambia por un cero
             Integer val = 0;
             obj = (T) val;
         }
@@ -108,6 +108,13 @@ public class SparseMatrix<T> {
         return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
     }
     
+//    public SparseMatrix<T> add(SparseMatrix<T> m) {
+//        SparseMatrix<T> newMatrix = new SparseMatrix<T>(this.numRows, this.numColumns);
+//        if () {
+//
+//        }
+//        return newMatrix;
+//    }
    
     public SparseMatrix<T> transpose(){
         SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumRows()); // crea una nueva matriz con las dimensiones transpuestas
@@ -119,7 +126,7 @@ public class SparseMatrix<T> {
         return newMatrix;
         
     }
-    
+            
     public SparseMatrix<T> splice(int f1, int f2, int c1, int c2) {
         int rows = (f2 - f1 + 1); //Calcula la cantidad de filas que tendrá la nueva matriz
         int columns = (c2 - c1 + 1); //Calcula la cantidad de columnas que tendrá la nueva matriz
