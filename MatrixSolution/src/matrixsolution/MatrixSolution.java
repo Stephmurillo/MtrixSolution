@@ -50,12 +50,15 @@ public class MatrixSolution {
         System.out.println("_____MATRIZ B_____");
         SparseMatrixB = readAttributesXml(XML_FILE_B);
         System.out.println(SparseMatrixA.toString());
-        System.out.println();
+        System.out.println(SparseMatrixA.splice(1, 3, 0, 3).toString());
 
         //Test values for a matrix
         BoxItem zero = new BoxItem(0, 0 ,0);
+        BoxItem obj = new BoxItem(2, 3, 5);
+        int canRows = 10;
+        int canColumns = 5;
         
-        //Create and fill a sparse matrix with XML readed objects
+//        //Create and fill a sparse matrix with XML readed objects
 //        SparseMatrix<BoxItem> matrix = new SparseMatrix(canRows, canColumns);
 //        for(int i = 0; i < matrix.getNumRows(); i++){
 //            matrix.addRow(getListRow(SparseMatrixA, i));
@@ -68,18 +71,25 @@ public class MatrixSolution {
 //        System.out.println("-------------------------");
 //        SparseMatrix<BoxItem> matrixFit = matrix.fitMatrix(matrix, 4, 5,zero);
 //        System.out.println(matrixFit.toString());
-//        
+        
 //        //Get the value of a position
-//        System.out.println("\nValor / Pos[1, 0]: " + matrix.getBoxItem(1, 0) + "\n");
-//        System.out.println("\nValor2 / Pos[1, 1]: " + matrix.getBoxItem(1, 1) + "\n");
-//        
-//        //Create and fill a sparse matrix with specific objects
-//        
-//        SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns, zero);
-//        System.out.println(matrixT.toString());
-//        
-//        //Create transpose matrixT
-//        System.out.println("TransposeMatrix{ \n" + matrixT.transpose().toString());
+//        System.out.println("\nValor / Pos[1, 0]: " + matrix.getT(1, 0) + "\n");
+//        System.out.println("\nValor2 / Pos[1, 1]: " + matrix.getT(1, 1) + "\n");
+        
+        //Create and fill a sparse matrix with specific objects
+        
+        SparseMatrix<BoxItem> matrixT = new SparseMatrix(canRows, canColumns, zero);
+        System.out.println(matrixT.toString());
+        matrixT.setT(1, 2, obj);
+        matrixT.setT(3, 4, obj);
+        matrixT.setT(2, 3, obj);
+        System.out.println(matrixT.toString());
+        System.out.println("Recuperando valor: " + matrixT.getT(1, 2));
+        System.out.println("Fila 1: 1 / Fila 2: 3 / Columna 1: 2 / Columna 2: 4\n" + matrixT.splice(1, 2, 2, 4).toString());
+
+        
+        //Create transpose matrixT
+//       System.out.println("TransposeMatrix{ \n" + matrixT.transpose().toString());
     }
 
     

@@ -22,11 +22,6 @@ package collection;
 
 public class SparseMatrix<T> {
 
-    public SparseMatrix(int numRows, int numColumns) {
-        this.numRows = numRows;
-        this.numColumns = numColumns;
-    }
-    
     public SparseMatrix(int numRows, int numColumns, T objItem) {
         this.emptyObj = objItem;
         this.numRows = numRows;
@@ -37,15 +32,37 @@ public class SparseMatrix<T> {
         for(int i = 0; i < this.numColumns; i++){
             tempRowList.add(objItem);
         }
-//        for(int i = 0; i < this.numRows; i++){
-//            tempColunmList.add(objItem);
-//        }
+        for(int i = 0; i < this.numRows; i++){
+            tempColunmList.add(objItem);
+        }
         for(int i = 0; i < this.numRows; i++){
             this.addRow(tempRowList);
         }
-//        for(int i = 0; i < this.numColumns; i++){
-//            this.addColumn(tempColunmList);
-//        }
+        for(int i = 0; i < this.numColumns; i++){
+            this.addColumn(tempColunmList);
+        }
+    }
+    
+    public SparseMatrix(int numRows, int numColumns) {
+        Integer val = 0;
+        T obj = (T) val;
+        this.numRows = numRows;
+        this.numColumns = numColumns;
+        List<T> tempRowList = new List<>();
+        List<T> tempColunmList = new List<>();
+        
+        for(int i = 0; i < this.numColumns; i++){
+            tempRowList.add(obj);
+        }
+        for(int i = 0; i < this.numRows; i++){
+            tempColunmList.add(obj);
+        }
+        for(int i = 0; i < this.numRows; i++){
+            this.addRow(tempRowList);
+        }
+        for(int i = 0; i < this.numColumns; i++){
+            this.addColumn(tempColunmList);
+        }
     }
 
     public int getNumRows() {
@@ -110,40 +127,26 @@ public class SparseMatrix<T> {
         return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
         /*(String) objItem.getInfo();*/
     }
-    
-    public List<T> getColumna(int i) {
-        List<T> fila = this.columns.get(i);
-        return fila;
-    }
-    
-    public List<T> transpose() {
-        List<T> newMatrix = new List<T>();
-        this.setNumRows(this.getNumColumns());
-        this.setNumColumns(this.getNumRows());
+        
+    public SparseMatrix<T> splice(int f1, int f2, int c1, int c2) {
+        int rows = (f2 - f1 + 1);
+        int columns = (c2 - c1 + 1);
+        SparseMatrix<T> newMatrix = new SparseMatrix<T>(rows, columns);
         try {
-            for (int i = 0; i <= this.getNumRows(); i++) {
-                List<T> fila = this.columns.get(i);
-                newMatrix.add((T) fila);
+            int row = 0;
+            for (int i = f1; i <= f2; i++) {
+                int column = 0;
+                for (int j = c1; j <= c2; j++) {
+                    T obj = this.getT(i, j);
+                    newMatrix.setT(row, column, obj);
+                    column++;
+                }
+                row++;
             }
-        } catch (Exception Ex){}
+        } catch (Exception ex) {
+        }
         return newMatrix;
     }
-    
-//    public SparseMatrix<T> add(SparseMatrix<T> m){
-//        int canThisRows = this.getNumRows();
-//        int canMRows = m.getNumRows();
-//        int canThisColumns = this.getNumRows();
-//        int canMColumns = m.getNumRows();
-//        if(canThisRows > canMRows){
-//         canMRows = canThisRows;
-//        }
-//        if(canThisColumns > canMColumns){
-//         canMColumns = canThisColumns;
-//        } 
-//        
-//        SparseMatrix<T> newMatrix = new SparseMatrix(canMRows,canMColumns);
-//        
-//    }
     
     public SparseMatrix<T> fitMatrix(SparseMatrix<T> m, int r, int c, T empty){
         SparseMatrix<T> newMatrix = new SparseMatrix(r, c);
