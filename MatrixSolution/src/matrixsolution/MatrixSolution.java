@@ -85,6 +85,22 @@ public class MatrixSolution {
         //They are equals?
         System.out.println("Equals? [Matrix1 & SparseMatrixA]{ \n" + matrix.Equals(SparseMatrixA));
         System.out.println("Equals? [Matrix & Matrix]{ \n" + matrix.Equals(matrix));
+        
+        SparseMatrix<BoxItem> matrixA = new SparseMatrix<BoxItem>(2, 2);
+        matrixA.setT(0, 0, val);
+        matrixA.setT(0, 1, val);
+        matrixA.setT(1, 0, val);
+        matrixA.setT(1, 1, val);
+        System.out.println("MatrixA: \n" + matrixA.toString());
+        
+        SparseMatrix<BoxItem> matrixB = new SparseMatrix<BoxItem>(2, 2);
+        matrixB.setT(0, 0, val);
+        matrixB.setT(0, 1, val);
+        matrixB.setT(1, 0, val);
+        matrixB.setT(1, 1, val);
+        System.out.println("MatrixB: \n" + matrixB.toString());
+        
+        System.out.println("MatrixA + MatrixB: \n" + matrixA.add(matrixB).toString());
     }
 
     

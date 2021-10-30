@@ -58,6 +58,14 @@ public class SparseMatrix<T> {
         return numColumns;
     }
     
+    public int getCountRows() {
+        return this.rows.size();
+    }
+    
+    public int getCountColumns() {
+        return this.rows.get(0).size();
+    }
+    
     void setNumRows(int r) {
         numRows = r;
     }
@@ -107,17 +115,48 @@ public void setT(int r, int c, T obj) {
     public String toString() {
         return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
     }
-
-public SparseMatrix<T> transpose(){
-        SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumRows()); // crea una nueva matriz con las dimensiones trspuestas
+    
+    public SparseMatrix<T> add(SparseMatrix<T> m){
+        SparseMatrix<T> newMatrix = null;
+        try{
+//        if(this.getNumRows() > m.getNumRows()){
+//        //añada las filas que faltan a m
+//        }
+//        if(this.getNumRows() < m.getNumRows()){
+//        //añada las filas que faltan a this
+//        }
+//        if(this.getNumColumns() > m.getNumColumns()){
+//        //añada las columnas que faltan a m
+//        }
+//        if(this.getNumColumns() < m.getNumColumns()){
+//        //añada las columnas que faltan a this
+//        }
         
-            for(int i = 0; i < this.getNumColumns(); i++) {
-                for(int j = 0; j < this.getNumRows(); j++) {
-                        newMatrix.setT(i,j,this.getRows().get(j).get(i));//obtiene la lista de filas en una posicion y el objeto ubicaado e la posicion de la columna correspodiente
-                }   //asigna a la nueva matriz creada el valor obtenido 
+        newMatrix = new SparseMatrix<T>(this.getNumRows(), this.getNumColumns());
+        if(this.getNumRows() == m.getNumRows() && this.getNumColumns() == m.getNumColumns()){
+            for(int i = 0; i <= this.getNumColumns(); i++){
+                for(int j = 1; j <= this.getNumColumns(); j++){
+                    Integer val = Integer.parseInt(this.getT(i, j).toString()) + Integer.parseInt(m.getT(i, j).toString());
+                    T obj = (T) val;
+                    newMatrix.setT(i, j, obj);
+                }
             }
+        }
+        }catch(Exception ex){}
         return newMatrix;
-        
+    }
+    
+
+    public SparseMatrix<T> transpose() {
+        SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumRows()); // crea una nueva matriz con las dimensiones trspuestas
+
+        for (int i = 0; i < this.getNumColumns(); i++) {
+            for (int j = 0; j < this.getNumRows(); j++) {
+                newMatrix.setT(i, j, this.getRows().get(j).get(i));//obtiene la lista de filas en una posicion y el objeto ubicaado e la posicion de la columna correspodiente
+            }   //asigna a la nueva matriz creada el valor obtenido 
+        }
+        return newMatrix;
+
     }
             
     public SparseMatrix<T> splice(int f1, int f2, int c1, int c2) {
