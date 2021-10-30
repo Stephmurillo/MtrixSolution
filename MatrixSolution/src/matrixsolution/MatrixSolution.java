@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 /**
 *
 * (c) 2021
-* @author Yoselin Rojas, Cinthya Murillo, Sebastián Cabezas
+* @author Yoselin Rojas, Cinthya Murillo
 * @version 1.0.0 2021-10-24
 *
 * -----------------------------------------------
@@ -24,7 +24,6 @@ import org.w3c.dom.NodeList;
 *
 * 207700499 Rojas Fuentes, Yoselin - Grupo 04
 * 305260682 Murillo Hidalgo, Cinthya - Grupo 05
-* 402260762 Cabezas Madrigal, Sebastián  - Grupo 4
 * -----------------------------------------------
  * @param <T>
 *
@@ -52,8 +51,11 @@ public class MatrixSolution {
         System.out.println(SparseMatrixA.toString());
         System.out.println();
 
-//        //Create transpose matrixT
+        //Create transpose matrix
         System.out.println("TransposeMatrix{ \n" + SparseMatrixA.transpose().toString());
+        
+        //Create splice matrix
+        System.out.println("SpliceMatrix [f1: 1, f2: 3, c1: 0, c2: 3]{ \n" + SparseMatrixA.splice(1, 3, 0, 3).toString());
     }
 
     
