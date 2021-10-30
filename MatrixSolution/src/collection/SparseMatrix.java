@@ -22,6 +22,11 @@ package collection;
 
 public class SparseMatrix<T> {
 
+    public SparseMatrix(int numRows, int numColumns) {
+        this.numRows = numRows;
+        this.numColumns = numColumns;
+    }
+    
     public SparseMatrix(int numRows, int numColumns, T objItem) {
         this.emptyObj = objItem;
         this.numRows = numRows;
@@ -33,35 +38,7 @@ public class SparseMatrix<T> {
             tempRowList.add(objItem);
         }
         for(int i = 0; i < this.numRows; i++){
-            tempColunmList.add(objItem);
-        }
-        for(int i = 0; i < this.numRows; i++){
             this.addRow(tempRowList);
-        }
-        for(int i = 0; i < this.numColumns; i++){
-            this.addColumn(tempColunmList);
-        }
-    }
-    
-    public SparseMatrix(int numRows, int numColumns) {
-        Integer val = 0;
-        T obj = (T) val;
-        this.numRows = numRows;
-        this.numColumns = numColumns;
-        List<T> tempRowList = new List<>();
-        List<T> tempColunmList = new List<>();
-        
-        for(int i = 0; i < this.numColumns; i++){
-            tempRowList.add(obj);
-        }
-        for(int i = 0; i < this.numRows; i++){
-            tempColunmList.add(obj);
-        }
-        for(int i = 0; i < this.numRows; i++){
-            this.addRow(tempRowList);
-        }
-        for(int i = 0; i < this.numColumns; i++){
-            this.addColumn(tempColunmList);
         }
     }
 
@@ -85,13 +62,8 @@ public class SparseMatrix<T> {
         this.rows.add(row);
     }
     
-    public void addColumn(List<T> row){
-        this.columns.add(row);
-    }
-    
     public void addT(int numRow, int numColumn, Node<T> objItem){
-        this.columns.get(numColumn).add(objItem, numColumn);
-        this.rows.get(numRow).add(objItem, numRow);
+        this.rows.get(numRow).add(objItem, numColumn);
     }
     
     public T getT(int r, int c) {
@@ -102,21 +74,21 @@ public class SparseMatrix<T> {
     }
     
     public void setT(int r, int c, T obj) {
-        if(r < this.getNumRows() && c < this.getNumColumns()){
+        if(r < this.getNumRows() && c < this.getNumColumns()){//evalua que la posicion a cambiar este dentro de las dimensiones de la matriz
             List<T> fila = new List();
             
             for(int i = 0; i < this.numColumns; i++) {
                 if (i == c) {
-                    fila.add(obj);
-                } else if (this.getRows().get(r).get(i) != this.emptyObj) {
-                    fila.add(this.getRows().get(r).get(i));
+                    fila.add(obj);//inserta el valor recibido en la fila cuando esta en lña posicion de columna
+                } else if (this.getRows().get(r).get(i) != this.emptyObj) { //si el objeto no es empty(clase representa vacio)
+                    fila.add(this.getRows().get(r).get(i)); //agrega el objeto de la fila r en la posicion de columna i
                 }else {
-                    fila.add(this.emptyObj);
+                    fila.add(this.emptyObj);//agrega a fila un elemento empty(clase representa vacio)
                 }
             }
 
-            this.getRows().remove(r);
-            this.getRows().add(fila, r);
+            this.getRows().remove(r);//remueve de las filas de la matriz la fila especifica donde se va a cambiar el valor
+            this.getRows().add(fila, r); //agrega nuevamente en esa posicion la nueva fila donde se cambiado el objeto debido
 
             System.out.println("----");
         }
@@ -125,27 +97,19 @@ public class SparseMatrix<T> {
     @Override
     public String toString() {
         return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
-        /*(String) objItem.getInfo();*/
     }
+    
+   
+    public SparseMatrix<T> transpose(){
+        SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumColumns(),this.emptyObj); // crea una nueva matriz con las dimensiones trspuestas
         
-    public SparseMatrix<T> splice(int f1, int f2, int c1, int c2) {
-        int rows = (f2 - f1 + 1);
-        int columns = (c2 - c1 + 1);
-        SparseMatrix<T> newMatrix = new SparseMatrix<T>(rows, columns);
-        try {
-            int row = 0;
-            for (int i = f1; i <= f2; i++) {
-                int column = 0;
-                for (int j = c1; j <= c2; j++) {
-                    T obj = this.getT(i, j);
-                    newMatrix.setT(row, column, obj);
-                    column++;
-                }
-                row++;
+            for(int i = 0; i < this.getNumColumns(); i++) {
+                for(int j = 0; j < this.getNumRows(); j++) {
+                        newMatrix.setT(i,j,this.getRows().get(j).get(i));//obtiene la lista de filas en una posicion y el objeto ubicaado e la posicion de la columna correspodiente
+                }   //asigna a la nueva matriz creada el valor obtenido 
             }
-        } catch (Exception ex) {
-        }
         return newMatrix;
+        
     }
     
     public SparseMatrix<T> fitMatrix(SparseMatrix<T> m, int r, int c, T empty){
@@ -154,27 +118,27 @@ public class SparseMatrix<T> {
         
         for(int i = 0; i < r; i++){
             List<T> tempRowList = new List<>();
-            List<T> specificRow = m.rows.get(i);
+            List<T> specificRow = m.rows.get(i);//extrae la lista especificada por parametro
             
             if(count == r){
                 break;
             }
             
-            if (specificRow != null && specificRow.size() > 0) {
+            if (specificRow != null && specificRow.size() > 0) {  // evalua que la fila especifica tenga al menos un objeto
                 
                 for(int j = 0; j < c; j++){
                     if(specificRow.get(j) != null){
-                        tempRowList.add(specificRow.get(j));
+                        tempRowList.add(specificRow.get(j));//añade a la nueva lista los objetos de la fila
                     } else {
-                        tempRowList.add(empty);
+                        tempRowList.add(empty);// si hay espacios nulos inserta un objeto empty(clase representa vacio)
                     }
                 }
 
-                newMatrix.addRow(tempRowList);
+                newMatrix.addRow(tempRowList);// añade la lista resultante como una fila de la nueva matriz
                 count++;
             } else {
                 for(int k = 0; k < c; k++) {
-                    tempRowList.add(empty);
+                    tempRowList.add(empty);//si la fila especifica es nula la llena con objetos empty(clase representa vacio)
                 }
                 newMatrix.addRow(tempRowList);
                 count++;
@@ -187,13 +151,7 @@ public class SparseMatrix<T> {
         return rows;
     }
 
-    public List<List<T>> getColumns() {
-        return columns;
-    }
-    
-    
     public List<List<T>> rows = new List();
-    public List<List<T>> columns = new List();
     public Node<T> objItem = new Node();
     public int numRows;
     public int numColumns;
