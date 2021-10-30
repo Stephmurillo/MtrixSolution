@@ -58,6 +58,14 @@ public class SparseMatrix<T> {
         return numColumns;
     }
     
+    public int getCountRows() {
+        return this.rows.size();
+    }
+    
+    public int getCountColumns() {
+        return this.rows.get(0).size();
+    }
+    
     void setNumRows(int r) {
         numRows = r;
     }
