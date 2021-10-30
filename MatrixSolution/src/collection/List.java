@@ -1,6 +1,7 @@
 package collection;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
 *
@@ -214,20 +215,38 @@ public class List<T> extends Collection<T> {
         }
         return r;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final List<?> other = (List<?>) obj;
+        if (this.n != other.n) {
+            return false;
+        }
+        if (!Objects.equals(this.first, other.first)) {
+            return false;
+        }
+        if (!Objects.equals(this.last, other.last)) {
+            return false;
+        }
+        return true;
+    }
     
-//    public T getObject(int pos) {
-//        Node<T> aux = this.first;
-//        int k = 0;
-//        while (aux != null) {
-//            //int obj = Integer.parseInt((String) aux.getRight().getInfo());
-//            if (k == pos) {
-//                return aux.getInfo();
-//            }
-//            aux = aux.getRight();
-//            k++;
-//        }
-//        return null;
-//    }
+    
 
     @Override
     public T get(int pos) {

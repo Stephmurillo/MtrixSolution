@@ -40,20 +40,25 @@ public class MatrixSolution {
     private final static String VALUE_ATTRIBUTE = "value";
     
     private static SparseMatrix<BoxItem> SparseMatrixA = null;
+    private static SparseMatrix<BoxItem> SparseMatrixAEqual = null;
     private static SparseMatrix<BoxItem> SparseMatrixB = null;
 
     public static void main(String[] args) {
         //Reading XML files 
         System.out.println("_____MATRIZ A_____");
         SparseMatrixA = readAttributesXml(XML_FILE_A);
+        SparseMatrixAEqual = readAttributesXml(XML_FILE_A);
         System.out.println();
         System.out.println("_____MATRIZ B_____");
         SparseMatrixB = readAttributesXml(XML_FILE_B);
         System.out.println(SparseMatrixA.toString());
         System.out.println();
 
-//        //Create transpose matrixT
+//      //Calcula la transpuesta de una matriz
         System.out.println("TransposeMatrix{ \n" + SparseMatrixA.transpose().toString());
+        //Evalua si dos matrices son iguales
+        System.out.println("Equals?{ \n" + SparseMatrixA.Equals(SparseMatrixAEqual));
+        System.out.println("Equals?{ \n" + SparseMatrixA.Equals(SparseMatrixB));
     }
 
     

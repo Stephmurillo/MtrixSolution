@@ -57,6 +57,39 @@ public class BoxItem {
         return String.valueOf(valor);
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + this.row;
+        hash = 67 * hash + this.column;
+        hash = 67 * hash + this.valor;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BoxItem other = (BoxItem) obj;
+        if (this.row != other.row) {
+            return false;
+        }
+        if (this.column != other.column) {
+            return false;
+        }
+        if (this.valor != other.valor) {
+            return false;
+        }
+        return true;
+    }
+
     
     
     

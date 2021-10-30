@@ -1,5 +1,7 @@
 package collection;
 
+import java.util.Objects;
+
 /**
 *
 * (c) 2021
@@ -58,6 +60,41 @@ public class Node<T> {
         this.right = right;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + Objects.hashCode(this.info);
+        hash = 89 * hash + Objects.hashCode(this.right);
+        hash = 89 * hash + Objects.hashCode(this.down);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Node<?> other = (Node<?>) obj;
+        if (!Objects.equals(this.info, other.info)) {
+            return false;
+        }
+        if (!Objects.equals(this.right, other.right)) {
+            return false;
+        }
+        if (!Objects.equals(this.down, other.down)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
     private T info;
     private Node<T> right;
     private Node<T> down;

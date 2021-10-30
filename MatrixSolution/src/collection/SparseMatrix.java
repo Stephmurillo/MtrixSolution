@@ -32,7 +32,6 @@ public class SparseMatrix<T> {
         this.numRows = numRows;
         this.numColumns = numColumns;
         List<T> tempRowList = new List<>();
-        List<T> tempColunmList = new List<>();
         
         for(int i = 0; i < this.numColumns; i++){
             tempRowList.add(objItem);
@@ -68,8 +67,8 @@ public class SparseMatrix<T> {
     
     public T getT(int r, int c) {
         T obj = null;
-        List<T> fila = this.rows.get(r);
-        obj = fila.get(c);
+        List<T> fila = this.rows.get(r); // extrae una fila especifica de la matriz
+        obj = fila.get(c); // obtiene el elemento con la posicion en la columna especifica
         return obj;
     }
     
@@ -99,7 +98,6 @@ public class SparseMatrix<T> {
         return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
     }
     
-   
     public SparseMatrix<T> transpose(){
         SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumColumns(),this.emptyObj); // crea una nueva matriz con las dimensiones trspuestas
         
@@ -146,11 +144,32 @@ public class SparseMatrix<T> {
         }
         return newMatrix;
     }
+    
+
+    public boolean Equals(SparseMatrix<T> other){
+        boolean flag = false;
+        for (int i = 0; i < this.getNumColumns(); i++) {
+            for (int j = 0; j < this.getNumRows(); j++) {
+               if(this.getNumRows() == other.getNumRows() && this.getNumColumns() == other.getNumColumns()){
+                    if(this.getRows().get(i).get(j).equals(other.getRows().get(i).get(j))){
+                        flag = true;
+                    }
+                    else{
+                       return false;
+                    }
+               }
+               else{
+                   flag = false;
+               }
+            } 
+        }
+        return flag;  
+    }
 
     public List<List<T>> getRows() {
         return rows;
     }
-
+    
     public List<List<T>> rows = new List();
     public Node<T> objItem = new Node();
     public int numRows;
