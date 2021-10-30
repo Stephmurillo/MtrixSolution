@@ -67,8 +67,15 @@ public class SparseMatrix<T> {
     
     public T getT(int r, int c) {
         T obj = null;
+        List<T> fila = this.rows.get(r); //Retorna la fila específicada
+        obj = fila.get(c); //Retorna el objeto en la posición especificada de la fila
+        if(obj == null){ //Si el valor es nulo lo cambia por un cero
+            Integer val = 0;
+            obj = (T) val;
+        }
         List<T> fila = this.rows.get(r); // extrae una fila especifica de la matriz
         obj = fila.get(c); // obtiene el elemento con la posicion en la columna especifica
+
         return obj;
     }
     
@@ -97,11 +104,7 @@ public class SparseMatrix<T> {
     public String toString() {
         return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
     }
-    
-    public List<List<T>> getRows() {
-        return rows;
-    }
-    
+
     public SparseMatrix<T> transpose(){
         SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumColumns(),this.emptyObj); // crea una nueva matriz con las dimensiones trspuestas
         
@@ -112,6 +115,26 @@ public class SparseMatrix<T> {
             }
         return newMatrix;
         
+    }
+            
+    public SparseMatrix<T> splice(int f1, int f2, int c1, int c2) {
+        int rows = (f2 - f1 + 1); //Calcula la cantidad de filas que tendrá la nueva matriz
+        int columns = (c2 - c1 + 1); //Calcula la cantidad de columnas que tendrá la nueva matriz
+        SparseMatrix<T> newMatrix = new SparseMatrix<T>(rows, columns); 
+        try {
+            int row = 0; //Variable para moverse por las filas
+            for (int i = f1; i <= f2; i++) {
+                int column = 0; //Variable para moverse por las columnas
+                for (int j = c1; j <= c2; j++) {
+                    T obj = this.getT(i, j); //Se extrae el objeto de la matrix original en cada posición
+                    newMatrix.setT(row, column, obj); //Se agrega el objeto a cada posición de la nueva matriz
+                    column++; 
+                }
+                row++;
+            }
+        } catch (Exception ex) {
+        }
+        return newMatrix;
     }
     
     public SparseMatrix<T> fitMatrix(SparseMatrix<T> m, int r, int c, T empty){
@@ -170,9 +193,8 @@ public class SparseMatrix<T> {
         return flag;  
     }
 
-    public SparseMatrix<T> add(SparseMatrix<T> m){
-    
-    return null;
+    public List<List<T>> getRows() {
+        return rows;
     }
     
     public List<List<T>> rows = new List();
