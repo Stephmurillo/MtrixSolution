@@ -119,34 +119,34 @@ public void setT(int r, int c, T obj) {
     public SparseMatrix<T> add(SparseMatrix<T> m){
         SparseMatrix<T> newMatrix = null;
         try{
-//        if(this.getNumRows() > m.getNumRows()){
-//        //añada las filas que faltan a m
-//        }
-//        if(this.getNumRows() < m.getNumRows()){
-//        //añada las filas que faltan a this
-//        }
-//        if(this.getNumColumns() > m.getNumColumns()){
-//        //añada las columnas que faltan a m
-//        }
-//        if(this.getNumColumns() < m.getNumColumns()){
-//        //añada las columnas que faltan a this
-//        }
+        if(this.getNumRows() > m.getNumRows()){
+        //añada las filas que faltan a m
+        }
+        if(this.getNumRows() < m.getNumRows()){
+        //añada las filas que faltan a this
+        }
+        if(this.getNumColumns() > m.getNumColumns()){
+        //añada las columnas que faltan a m
+        }
+        if(this.getNumColumns() < m.getNumColumns()){
+        //añada las columnas que faltan a this
+        }
         
         newMatrix = new SparseMatrix<T>(this.getNumRows(), this.getNumColumns());
-        if(this.getNumRows() == m.getNumRows() && this.getNumColumns() == m.getNumColumns()){
-            for(int i = 0; i <= this.getNumColumns(); i++){
-                for(int j = 1; j <= this.getNumColumns(); j++){
-                    Integer val = Integer.parseInt(this.getT(i, j).toString()) + Integer.parseInt(m.getT(i, j).toString());
-                    T obj = (T) val;
-                    newMatrix.setT(i, j, obj);
+        if(this.getNumRows() == m.getNumRows() && this.getNumColumns() == m.getNumColumns()){//se asegura que las matrices tengan el mismo tamaño
+            for(int i = 0; i <= this.getCountRows(); i++){
+                for(int j = 0; j <= this.getNumColumns(); j++){
+                    Integer val = Integer.parseInt(this.getT(i, j).toString()) + Integer.parseInt(m.getT(i, j).toString()); //suma los objetos de ambas matrices en la misma posición
+                    T obj = (T) val;//Convierte el valor de la suma en un objeto
+                    newMatrix.setT(i, j, obj);//El resultado lo añade en la nueva matriz
                 }
             }
         }
         }catch(Exception ex){}
         return newMatrix;
+    
     }
     
-
     public SparseMatrix<T> transpose() {
         SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumRows()); // crea una nueva matriz con las dimensiones trspuestas
 
