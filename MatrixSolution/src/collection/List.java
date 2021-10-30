@@ -1,11 +1,12 @@
 package collection;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
 *
 * (c) 2021
-* @author Yoselin Rojas, Cinthya Murillo
+* @author Yoselin Rojas, Cinthya Murillo, Sebastián Cabezas
 * @version 1.0.0 2021-10-24
 *
 * -----------------------------------------------
@@ -15,6 +16,7 @@ import java.util.Iterator;
 *
 * 207700499 Rojas Fuentes, Yoselin - Grupo 04
 * 305260682 Murillo Hidalgo, Cinthya - Grupo 05
+* 402260762 Cabezas Madrigal, Sebastián  - Grupo 4
 * -----------------------------------------------
  * @param <T>
 *
@@ -213,6 +215,38 @@ public class List<T> extends Collection<T> {
         }
         return r;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final List<?> other = (List<?>) obj;
+        if (this.n != other.n) {
+            return false;
+        }
+        if (!Objects.equals(this.first, other.first)) {
+            return false;
+        }
+        if (!Objects.equals(this.last, other.last)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     @Override
     public T get(int pos) {
