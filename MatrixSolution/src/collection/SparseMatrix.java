@@ -78,6 +78,10 @@ public class SparseMatrix<T> {
         T obj = null;
         List<T> fila = this.rows.get(r); //Retorna la fila específicada
         obj = fila.get(c); //Retorna el objeto en la posición especificada de la fila
+        if(obj == null){
+            Integer val = 0;
+            obj = (T) val;
+        }
         return obj;
     }
     
@@ -106,8 +110,7 @@ public class SparseMatrix<T> {
     
    
     public SparseMatrix<T> transpose(){
-        SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumColumns(),this.emptyObj); // crea una nueva matriz con las dimensiones trspuestas
-        
+        SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumRows()); // crea una nueva matriz con las dimensiones transpuestas
             for(int i = 0; i < this.getNumColumns(); i++) {
                 for(int j = 0; j < this.getNumRows(); j++) {
                         newMatrix.setT(i,j,this.getRows().get(j).get(i));//Obtiene la lista de filas en una posicion y el objeto ubicaado e la posicion de la columna correspodiente
@@ -149,7 +152,7 @@ public class SparseMatrix<T> {
                 break;
             }
             
-            if (specificRow != null && specificRow.size() > 0) {  //Evalua que la fila especifica tenga al menos un objeto
+            if (specificRow != null && specificRow.size() > 0) { //Evalua que la fila especifica tenga al menos un objeto
                 
                 for(int j = 0; j < c; j++){
                     if(specificRow.get(j) != null){
@@ -163,13 +166,19 @@ public class SparseMatrix<T> {
                 count++;
             } else {
                 for(int k = 0; k < c; k++) {
-                    tempRowList.add(empty);//Si la fila especifica es nula la llena con objetos empty(clase representa vacio)
+                    tempRowList.add(empty);//Si la fila especifica es nula la llena con objetos empty (clase que representa vacio)
                 }
                 newMatrix.addRow(tempRowList);
                 count++;
             }
         }
         return newMatrix;
+    }
+    
+    public T conversionIntToObj(int val){
+        Integer aux = val;
+        T obj = (T) aux;
+        return obj;
     }
 
     public List<List<T>> getRows() {
