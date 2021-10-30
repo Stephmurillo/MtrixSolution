@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 /**
 *
 * (c) 2021
-* @author Yoselin Rojas, Cinthya Murillo
+* @author Yoselin Rojas, Cinthya Murillo, Sebastián Cabezas
 * @version 1.0.0 2021-10-24
 *
 * -----------------------------------------------
@@ -24,6 +24,7 @@ import org.w3c.dom.NodeList;
 *
 * 207700499 Rojas Fuentes, Yoselin - Grupo 04
 * 305260682 Murillo Hidalgo, Cinthya - Grupo 05
+* 402260762 Cabezas Madrigal, Sebastián  - Grupo 4
 * -----------------------------------------------
  * @param <T>
 *
@@ -39,46 +40,25 @@ public class MatrixSolution {
     private final static String VALUE_ATTRIBUTE = "value";
     
     private static SparseMatrix<BoxItem> SparseMatrixA = null;
+    private static SparseMatrix<BoxItem> SparseMatrixAEqual = null;
     private static SparseMatrix<BoxItem> SparseMatrixB = null;
 
     public static void main(String[] args) {
         //Reading XML files 
         System.out.println("_____MATRIZ A_____");
         SparseMatrixA = readAttributesXml(XML_FILE_A);
+        SparseMatrixAEqual = readAttributesXml(XML_FILE_A);
         System.out.println();
         System.out.println("_____MATRIZ B_____");
         SparseMatrixB = readAttributesXml(XML_FILE_B);
-//        System.out.println(SparseMatrixA.toString());
-//        System.out.println();
-//        
-//        //Create transpose matrix
-//        System.out.println("TransposeMatrix{ \n" + SparseMatrixA.transpose().toString());
-//        
-//        //Create splice matrix
-//        System.out.println("SpliceMatrix [f1: 1, f2: 3, c1: 0, c2: 3]{ \n" + SparseMatrixA.splice(1, 3, 0, 3).toString());
-        
-        SparseMatrix<BoxItem> matrix = new SparseMatrix<BoxItem>(10, 5);
-        System.out.println(matrix.toString());
-        
-        BoxItem val = new BoxItem(0, 0 ,1);
-        matrix.setT(0, 0, val);
-        matrix.setT(1, 1, val);
-        matrix.setT(2, 2, val);
-        matrix.setT(2, 2, val);
-        matrix.setT(3, 3, val);
-        matrix.setT(4, 4, val);
-        System.out.println(matrix.toString());
-        
-        //Get the value of a specific position
-        System.out.println("\nPosition[1, 1]: " + matrix.getT(1, 1));
-        System.out.println("Position[3, 7]: " + matrix.getT(3, 7));
-        System.out.println("Position[4, 4]: " + matrix.getT(4, 4));
-        
-        //Create transpose matrix
-        System.out.println("\nTransposeMatrix{ \n" + matrix.transpose().toString());
-        
-        //Create splice matrix
-        System.out.println("SpliceMatrix [f1=[1] | f2=[6] | c1=[2] | c2=[3]{ \n" + matrix.splice(1, 6, 2, 3).toString());
+        System.out.println(SparseMatrixA.toString());
+        System.out.println();
+
+//      //Calcula la transpuesta de una matriz
+        System.out.println("TransposeMatrix{ \n" + SparseMatrixA.transpose().toString());
+        //Evalua si dos matrices son iguales
+        System.out.println("Equals?{ \n" + SparseMatrixA.Equals(SparseMatrixAEqual));
+        System.out.println("Equals?{ \n" + SparseMatrixA.Equals(SparseMatrixB));
     }
 
     
