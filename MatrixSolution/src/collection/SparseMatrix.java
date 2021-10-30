@@ -98,6 +98,10 @@ public class SparseMatrix<T> {
         return "SparseMatrix{\n" + rows + "\nnumRows: " + numRows + ", numColumns: " + numColumns + "}";
     }
     
+    public List<List<T>> getRows() {
+        return rows;
+    }
+    
     public SparseMatrix<T> transpose(){
         SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumColumns(),this.emptyObj); // crea una nueva matriz con las dimensiones trspuestas
         
@@ -166,8 +170,9 @@ public class SparseMatrix<T> {
         return flag;  
     }
 
-    public List<List<T>> getRows() {
-        return rows;
+    public SparseMatrix<T> add(SparseMatrix<T> m){
+    
+    return null;
     }
     
     public List<List<T>> rows = new List();
