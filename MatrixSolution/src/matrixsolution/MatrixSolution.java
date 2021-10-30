@@ -48,14 +48,37 @@ public class MatrixSolution {
         System.out.println();
         System.out.println("_____MATRIZ B_____");
         SparseMatrixB = readAttributesXml(XML_FILE_B);
-        System.out.println(SparseMatrixA.toString());
-        System.out.println();
-
+//        System.out.println(SparseMatrixA.toString());
+//        System.out.println();
+//        
+//        //Create transpose matrix
+//        System.out.println("TransposeMatrix{ \n" + SparseMatrixA.transpose().toString());
+//        
+//        //Create splice matrix
+//        System.out.println("SpliceMatrix [f1: 1, f2: 3, c1: 0, c2: 3]{ \n" + SparseMatrixA.splice(1, 3, 0, 3).toString());
+        
+        SparseMatrix<BoxItem> matrix = new SparseMatrix<BoxItem>(10, 5);
+        System.out.println(matrix.toString());
+        
+        BoxItem val = new BoxItem(0, 0 ,1);
+        matrix.setT(0, 0, val);
+        matrix.setT(1, 1, val);
+        matrix.setT(2, 2, val);
+        matrix.setT(2, 2, val);
+        matrix.setT(3, 3, val);
+        matrix.setT(4, 4, val);
+        System.out.println(matrix.toString());
+        
+        //Get the value of a specific position
+        System.out.println("\nPosition[1, 1]: " + matrix.getT(1, 1));
+        System.out.println("Position[3, 7]: " + matrix.getT(3, 7));
+        System.out.println("Position[4, 4]: " + matrix.getT(4, 4));
+        
         //Create transpose matrix
-        System.out.println("TransposeMatrix{ \n" + SparseMatrixA.transpose().toString());
+        System.out.println("\nTransposeMatrix{ \n" + matrix.transpose().toString());
         
         //Create splice matrix
-        System.out.println("SpliceMatrix [f1: 1, f2: 3, c1: 0, c2: 3]{ \n" + SparseMatrixA.splice(1, 3, 0, 3).toString());
+        System.out.println("SpliceMatrix [f1=[1] | f2=[6] | c1=[2] | c2=[3]{ \n" + matrix.splice(1, 6, 2, 3).toString());
     }
 
     
