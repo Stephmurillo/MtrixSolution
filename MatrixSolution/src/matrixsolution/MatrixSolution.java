@@ -79,13 +79,13 @@ public class MatrixSolution {
 //        System.out.println(matrixT.toString());
 //        
 //        //Create transpose matrixT
-//        System.out.println("TransposeMatrix{ \n" + matrixT.transpose().toString());
+        System.out.println("TransposeMatrix{ \n" + SparseMatrixA.transpose().toString());
     }
 
     
     private static SparseMatrix<BoxItem> readAttributesXml(String path) {
         BoxItem zero = new BoxItem(0, 0 ,0);
-        SparseMatrix<BoxItem> loadMatrix = new SparseMatrix<>(10, 10, zero);
+        SparseMatrix<BoxItem> loadMatrix = new SparseMatrix<>(5, 5, zero);
         File file = readXmlFile(path);
         Document document = null;
 

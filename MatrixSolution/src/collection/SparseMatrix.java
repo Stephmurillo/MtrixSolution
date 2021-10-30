@@ -116,17 +116,29 @@ public class SparseMatrix<T> {
         return fila;
     }
     
-    public List<T> transpose() {
-        List<T> newMatrix = new List<T>();
-        this.setNumRows(this.getNumColumns());
-        this.setNumColumns(this.getNumRows());
-        try {
-            for (int i = 0; i <= this.getNumRows(); i++) {
-                List<T> fila = this.columns.get(i);
-                newMatrix.add((T) fila);
+//    public List<T> transpose() {
+//        List<T> newMatrix = new List<T>();
+//        this.setNumRows(this.getNumColumns());
+//        this.setNumColumns(this.getNumRows());
+//        try {
+//            for (int i = 0; i <= this.getNumRows(); i++) {
+//                List<T> fila = this.columns.get(i);
+//                newMatrix.add((T) fila);
+//            }
+//        } catch (Exception Ex){}
+//        return newMatrix;
+//    }
+    
+    public SparseMatrix<T> transpose(){
+        SparseMatrix<T> newMatrix = new SparseMatrix(this.getNumColumns(), this.getNumColumns(),this.emptyObj);
+        
+            for(int i = 0; i < this.getNumColumns(); i++) {
+                for(int j = 0; j < this.getNumRows(); j++) {
+                        newMatrix.setT(i,j,this.getRows().get(j).get(i));
+                }   
             }
-        } catch (Exception Ex){}
         return newMatrix;
+        
     }
     
 //    public SparseMatrix<T> add(SparseMatrix<T> m){
