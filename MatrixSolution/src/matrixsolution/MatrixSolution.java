@@ -79,7 +79,7 @@ public class MatrixSolution {
         System.out.println("\nTransposeMatrix{ \n" + matrix.transpose().toString());
         
         //Create splice matrix
-        System.out.println("SpliceMatrix [f1=[1] | f2=[6] | c1=[2] | c2=[3]{ \nNOTA: Las filas empiezan en 0 y las columnas en 1.\n" + 
+        System.out.println("SpliceMatrix [f1=[1] | f2=[6] | c1=[2] | c2=[3]{\n"+ 
                 matrix.splice(1, 6, 2, 3).toString());
         
         //They are equals?
